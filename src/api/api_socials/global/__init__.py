@@ -1,0 +1,1 @@
+from extra import create_photo_link_extra

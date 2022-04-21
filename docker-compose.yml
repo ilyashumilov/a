@@ -1,0 +1,58 @@
+version: '3'
+
+services:
+
+  nginx:
+    image: nginx:1.15-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: always
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    depends_on:
+      - app
+    volumes:
+      - static:/app/static
+      - ./deploy/nginx:/etc/nginx/conf.d
+      - ./deploy/nginx/certs:/etc/ssl/certs
+      - ./deploy/certbot/conf:/etc/letsencrypt
+      - ./deploy/certbot/www:/var/www/certbot
+
+  certbot:
+    image: certbot/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    volumes:
+      - ./deploy/certbot/conf:/etc/letsencrypt
+      - ./deploy/certbot/www:/var/www/certbot
+
+  app: &app
+    build:
+      context: .
+      dockerfile: deploy/python/Dockerfile
+    restart: always
+    ports:
+      - 8000:8000
+    volumes:
+      - static:/app/static
+
+  redis:
+    image: redis:6-alpine
+    restart: always
+    ports:
+      - "6379:6379"
+    user: root
+    volumes:
+      - $PWD/redis-data:/var/lib/redis
+      - $PWD/redis.conf:/usr/local/etc/redis/redis.conf
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+
+  celery:
+    <<: *app
+    working_dir: /app/src
+    command: celery -A core worker -l INFO
+    ports: [ ]
+    volumes: [ ]
+
+volumes:
+  static:

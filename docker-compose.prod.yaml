@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:mainline-alpine
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - app
+    volumes:
+      - web-root:/var/www/html
+      - ./nginx-conf:/etc/nginx/conf.d
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+    networks:
+      - app-network
+
+  app:
+    build:
+      context: .
+      dockerfile: deploy/python/Dockerfile
+    ports:
+      - 8000:8000
+    expose:
+      - 8000
+    volumes:
+      - static:/app/static
+    container_name: app
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - web-root:/var/www/html
+    depends_on:
+      - nginx
+    command: certonly --webroot --webroot-path=/var/www/html --email dane4kq.develop@gmail.com --agree-tos --no-eff-email --force-renewal -d api-hype.uzavr.ru -d www.api-hype.uzavr.ru
+
+
+volumes:
+  static:
+  web-root:
+  certbot-etc:
+  certbot-var:
+
+networks:
+  app-network:
+    driver: bridge

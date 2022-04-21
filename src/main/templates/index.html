@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+<body>
+<div class="container mt-5">
+    <form method="post" action="">
+        {% csrf_token %}
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="RADIOBTN" id="inlineRadio1" value="Login" checked>
+            <label class="form-check-label" for="inlineRadio1">Лоигины или ссылки</label>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Ввести значения через перенос</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" name="texter" rows="3"></textarea>
+        </div>
+        <div class="mt-2 mb-2">
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="_1" name="_1" value="option1">
+                <label class="form-check-label" for="_1">post_default_count</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="_2" name="_2" value="option2">
+                <label class="form-check-label" for="_2">priority</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="_3" name="_3" value="option3">
+                <label class="form-check-label" for="_3">categories</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="_4" name="_4" value="option4">
+                <label class="form-check-label" for="_4">city</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="_5" name="_5" value="option5">
+                <label class="form-check-label" for="_5">country</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="_6" name="_6" value="option6">
+                <label class="form-check-label" for="_6">gender</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="_7" name="_7" value="option7">
+                <label class="form-check-label" for="_7">subscribers_count</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="_8" name="_8" value="option8">
+                <label class="form-check-label" for="_8">verification_type</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="_9" name="_9" value="option9">
+                <label class="form-check-label" for="_9">following</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="_10" name="_10" value="option10">
+                <label class="form-check-label" for="_10">status_id</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="_11" name="_11" value="option11">
+                <label class="form-check-label" for="_11">name</label>
+            </div>
+
+             <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="_12" name="_12" value="option12">
+                <label class="form-check-label" for="_12">ER12</label>
+            </div>
+
+             <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="_13" name="_13" value="option13">
+                <label class="form-check-label" for="_13">likes</label>
+            </div>
+
+             <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="_14" name="_14" value="option14">
+                <label class="form-check-label" for="_14">comments</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="_15" name="_15" value="option15">
+                <label class="form-check-label" for="_15">file_from_info</label>
+            </div>
+
+
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+
+</div>
+
+
+</body>
+</html>
